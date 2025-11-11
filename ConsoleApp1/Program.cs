@@ -1,0 +1,209 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp1
+{
+    //1.STRUCT KHAI BÁO LINH KIỆN 
+    public struct LinhKien
+    {
+        public string MSLK;
+        public string Name;
+        public string LoaiLK;
+        public decimal GiaNhap;
+        public int TonKho;
+
+        public LinhKien(string mslk, string name, string llk, decimal gn, int tk)
+        {
+            MSLK = mslk;
+            Name = name;
+            LoaiLK = llk;
+            GiaNhap = gn;
+            TonKho = tk;
+        }
+
+        public void HienThi()
+        {
+            Console.WriteLine($"{MSLK,-15} | {Name,-50} | {LoaiLK,-28} | {(GiaNhap.ToString("N0").Replace(',', '.')),20} đ | {TonKho,13}");
+        }
+    }
+
+    //2.STRUCT KHỞI TẠO SORTEDLIST LƯU CÁC LOẠI LINH KIỆN 
+    public struct ListLK
+    {
+        public SortedList<string, LinhKien> list;
+
+        public void Initiallize()
+        {
+            list = new SortedList<string, LinhKien>();
+
+            //1.Linh kien thu dong 
+            list.Add("LK01", new LinhKien { MSLK = "LK01", Name = "Dien tro               (Resistor)", LoaiLK = "Linh kien thu dong", GiaNhap = 500, TonKho = 150 });
+            list.Add("LK02", new LinhKien { MSLK = "LK02", Name = "tu dien                (Capacitor)", LoaiLK = "Linh kien thu dong", GiaNhap = 1200, TonKho = 80 });
+            list.Add("LK03", new LinhKien { MSLK = "LK03", Name = "Cuon cam               (Inductor)", LoaiLK = "Linh kien thu dong", GiaNhap = 2500, TonKho = 45 });
+            list.Add("LK04", new LinhKien { MSLK = "LK04", Name = "Bien tro               (Potentiometer)", LoaiLK = "Linh kien thu dong", GiaNhap = 3000, TonKho = 60 });
+            list.Add("LK05", new LinhKien { MSLK = "LK05", Name = "Varistor", LoaiLK = "Linh kien thu dong", GiaNhap = 2800, TonKho = 35 });
+            list.Add("LK06", new LinhKien { MSLK = "LK06", Name = "Thermistor", LoaiLK = "Linh kien thu dong", GiaNhap = 1500, TonKho = 55 });
+            list.Add("LK07", new LinhKien { MSLK = "LK07", Name = "Cau chi                (Fuse)", LoaiLK = "Linh kien thu dong", GiaNhap = 800, TonKho = 120 });
+            list.Add("LK08", new LinhKien { MSLK = "LK08", Name = "Transformer            (Bien ap)", LoaiLK = "Linh kien thu dong", GiaNhap = 25000, TonKho = 25 });
+
+            //2.Linh kien Ban Dan 
+            list.Add("LK09", new LinhKien { MSLK = "LK09", Name = "Diode                  (D)", LoaiLK = "Linh kien Ban Dan", GiaNhap = 300, TonKho = 200 });
+            list.Add("LK10", new LinhKien { MSLK = "LK10", Name = "Transistor             (Q)", LoaiLK = "Linh kien Ban Dan", GiaNhap = 800, TonKho = 100 });
+            list.Add("LK11", new LinhKien { MSLK = "LK11", Name = "Thyristor              (SCR)", LoaiLK = "Linh kien Ban Dan", GiaNhap = 4500, TonKho = 30 });
+            list.Add("LK12", new LinhKien { MSLK = "LK12", Name = "Triac", LoaiLK = "Linh kien Ban Dan", GiaNhap = 6500, TonKho = 40 });
+            list.Add("LK13", new LinhKien { MSLK = "LK13", Name = "Diac", LoaiLK = "Linh kien Ban Dan", GiaNhap = 5800, TonKho = 45 });
+            list.Add("LK14", new LinhKien { MSLK = "LK14", Name = "LED                    (Light Emitting Diode)", LoaiLK = "Linh kien Ban Dan", GiaNhap = 250, TonKho = 280 });
+            list.Add("LK15", new LinhKien { MSLK = "LK15", Name = "Photodiode", LoaiLK = "Linh kien Ban Dan", GiaNhap = 4200, TonKho = 35 });
+            list.Add("LK16", new LinhKien { MSLK = "LK16", Name = "Zener Diode", LoaiLK = "Linh kien Ban Dan", GiaNhap = 600, TonKho = 90 });
+
+            //3.Vi mach Tich hop
+            list.Add("LK17", new LinhKien { MSLK = "LK17", Name = "IC Op-amp              (LM741, LM358)", LoaiLK = "Vi mach Tich hop", GiaNhap = 3200, TonKho = 42 });
+            list.Add("LK18", new LinhKien { MSLK = "LK18", Name = "IC Timer 555", LoaiLK = "Vi mach Tich hop", GiaNhap = 2000, TonKho = 75 });
+            list.Add("LK19", new LinhKien { MSLK = "LK19", Name = "IC Nguon               (LM7805, LM317)", LoaiLK = "Vi mach Tich hop", GiaNhap = 4000, TonKho = 35 });
+            list.Add("LK20", new LinhKien { MSLK = "LK20", Name = "IC Logic               (AND, OR, NOT gates)", LoaiLK = "Vi mach Tich hop", GiaNhap = 1800, TonKho = 65 });
+            list.Add("LK21", new LinhKien { MSLK = "LK21", Name = "Vi dieu khien          (Arduino, PIC, 8051)", LoaiLK = "Vi mach Tich hop", GiaNhap = 45000, TonKho = 20 });
+            list.Add("LK22", new LinhKien { MSLK = "LK22", Name = "IC Khuech dai am thanh (LM386, TDA2030)", LoaiLK = "Vi mach Tich hop", GiaNhap = 5500, TonKho = 25 });
+            list.Add("LK23", new LinhKien { MSLK = "LK23", Name = "IC Shift Register      (74HC595)", LoaiLK = "Vi mach Tich hop", GiaNhap = 6000, TonKho = 30 });
+
+            //4.Linh kien Ket noi & Co khi
+            list.Add("Lk24", new LinhKien { MSLK = "LK24", Name = "Jack cam               (Audio jack, DC jack)", LoaiLK = "Linh kien Ket noi & Co khi", GiaNhap = 2500, TonKho = 65 });
+            list.Add("LK25", new LinhKien { MSLK = "LK25", Name = "Cong tac               (Switch)", LoaiLK = "Linh kien Ket noi & Co khi", GiaNhap = 1500, TonKho = 85 });
+            list.Add("Lk26", new LinhKien { MSLK = "LK26", Name = "Nut nhan               (Push button)", LoaiLK = "Linh kien Ket noi & Co khi", GiaNhap = 800, TonKho = 150 });
+            list.Add("Lk27", new LinhKien { MSLK = "LK27", Name = "Den bao                (Indicator light)", LoaiLK = "Linh kien Ket noi & Co khi", GiaNhap = 1200, TonKho = 95 });
+            list.Add("Lk28", new LinhKien { MSLK = "LK28", Name = "Coi bao                (Buzzer)", LoaiLK = "Linh kien Ket noi & Co khi", GiaNhap = 3800, TonKho = 40 });
+            list.Add("Lk29", new LinhKien { MSLK = "LK29", Name = "Ro-le                  (Relay)", LoaiLK = "Linh kien Ket noi & Co khi", GiaNhap = 8000, TonKho = 30 });
+            list.Add("Lk30", new LinhKien { MSLK = "LK30", Name = "Dong co                (Motor DC, Servo, Stepper)", LoaiLK = "Linh kien Ket noi & Co khi", GiaNhap = 28000, TonKho = 18 });
+
+            //5.Cam bien
+            list.Add("LK31", new LinhKien { MSLK = "LK31", Name = "Cam bien nhiet do      (LM35, DHT11)", LoaiLK = "Cam bien", GiaNhap = 35000, TonKho = 15 });
+            list.Add("LK32", new LinhKien { MSLK = "LK32", Name = "Cam bien anh sang      (LDR, Phototransistor)", LoaiLK = "Cam bien", GiaNhap = 2000, TonKho = 70 });
+            list.Add("LK33", new LinhKien { MSLK = "LK33", Name = "Cam bien chuyen dong   (PIR)", LoaiLK = "Cam bien", GiaNhap = 25000, TonKho = 18 });
+            list.Add("LK34", new LinhKien { MSLK = "LK34", Name = "Cam bien sieu am       (HC-SR04)", LoaiLK = "Cam bien", GiaNhap = 18000, TonKho = 22 });
+            list.Add("LK35", new LinhKien { MSLK = "LK35", Name = "Cam bien do am", LoaiLK = "Cam bien", GiaNhap = 15000, TonKho = 28 });
+            list.Add("LK36", new LinhKien { MSLK = "LK36", Name = "Cam bien gia toc       (MPU6050)", LoaiLK = "Cam bien", GiaNhap = 45000, TonKho = 12 });
+
+            //6.Hien thi
+            list.Add("LK37", new LinhKien { MSLK = "LK37", Name = "LCD 16x2", LoaiLK = "Hien thi", GiaNhap = 32000, TonKho = 20 });
+            list.Add("LK38", new LinhKien { MSLK = "LK38", Name = "LED 7 doan", LoaiLK = "Hien thi", GiaNhap = 4500, TonKho = 35 });
+            list.Add("LK39", new LinhKien { MSLK = "LK39", Name = "Man hinh OLED", LoaiLK = "Hien thi", GiaNhap = 55000, TonKho = 15 });
+            list.Add("LK40", new LinhKien { MSLK = "LK40", Name = "Matrix LED", LoaiLK = "Hien thi", GiaNhap = 12000, TonKho = 25 });
+
+            //7.Dao dong & Thach anh
+            list.Add("LK41", new LinhKien { MSLK = "LK41", Name = "Thach anh              (Crystal)", LoaiLK = "Dao dong & Thach anh", GiaNhap = 3000, TonKho = 60 });
+            list.Add("LK42", new LinhKien { MSLK = "LK42", Name = "IC Tao dao dong", LoaiLK = "Dao dong & Thach anh", GiaNhap = 4500, TonKho = 40 });
+
+            //8.Mach in & Phu kien
+            list.Add("LK43", new LinhKien { MSLK = "LK43", Name = "Board mach             (PCB)", LoaiLK = "Mach in & Phu kien", GiaNhap = 8000, TonKho = 50 });
+            list.Add("LK44", new LinhKien { MSLK = "LK44", Name = "Day cap ket noi", LoaiLK = "Mach in & Phu kien", GiaNhap = 1500, TonKho = 120 });
+            list.Add("LK45", new LinhKien { MSLK = "LK45", Name = "De IC                  (IC Socket)", LoaiLK = "Mach in & Phu kien", GiaNhap = 800, TonKho = 100 });
+            list.Add("LK46", new LinhKien { MSLK = "LK46", Name = "Heat sink", LoaiLK = "Mach in & Phu kien", GiaNhap = 2000, TonKho = 75 });
+        }
+
+        public void XuatDS()
+        {
+            Console.WriteLine("MA LINH KIEN    | TEN LINH KIEN                                      | LOAI LINH KIEN               | GIA NHAP LINH KIEN     | LUONG TON KHO");
+            Console.WriteLine("============================================================================================================================================");
+            foreach (var a in list)
+            {
+                a.Value.HienThi();
+            }
+        }
+
+        //Hàm về Menu
+        public void VeMenu()
+        {
+            Console.WriteLine("\nNhan Enter de quay ve Menu...");
+            Console.ReadKey();
+        }
+
+        
+    }
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.OutputEncoding = Encoding.UTF8;
+
+            ListLK a = new ListLK();
+            a.Initiallize();
+            
+
+            int use;
+            do
+            {
+                Console.WriteLine("\n~~~ MENU QUAN LY LINH KIEN ĐIEN TU ~~~");
+                Console.WriteLine("======================================");
+                Console.WriteLine("1. Bang tat ca linh kien co trong kho");
+                Console.WriteLine("2. Them linh kien");
+                Console.WriteLine("3. Tim kiem linh kien");
+                Console.WriteLine("4. Cap nhat linh kien");
+                Console.WriteLine("5. Sap xep linh kien");
+                Console.WriteLine("6. Xoa linh kien");
+                Console.WriteLine("7. Lap rap thiet bi");
+                Console.WriteLine("0. Thoat");
+                Console.Write("Chon chuc nang: ");
+
+                if (!int.TryParse(Console.ReadLine(), out use))
+                {
+                    use = -1;
+                }
+
+                Console.Clear();
+
+                switch (use)
+                {
+                    case 1:
+                        {
+                            
+                            break;
+                        }
+                    case 2:
+                        {
+                            
+                            break;
+                        }
+                    case 3:
+                        {
+                            
+                            break;
+                        }
+                    case 4:
+                        {
+                           
+                            break;
+                        }
+                    case 5:
+                        {
+                            
+                            break;
+                        }
+                    case 6:
+                        {
+                            
+                            break;
+                        }
+                    case 7:
+                        {
+                            
+                            break;
+                        }
+                    case 0:
+                        {
+                            Console.WriteLine("Thoat...");
+                            break;
+                        }
+                    default:
+                        {
+                            Console.WriteLine("Lua chon khong hợp le!");
+                            break;
+                        }
+                }
+            } while (use != 0);
+
+            Console.ReadKey();
+        }
+    }
+}
