@@ -117,12 +117,293 @@ namespace ConsoleApp1
         {
             Console.WriteLine("\nNhan Enter de quay ve Menu...");
             Console.ReadKey();
+            Console.Clear();
         }
 
         
     }
 
     //Phần của Nam
+    public struct THEM
+        {
+            public void Them(ref DanhSach ds)
+            {
+                Console.Clear();
+                LinhKien lk = new LinhKien();
+                Console.WriteLine("\n=== THÊM LINH KIỆN MỚI ===");
+
+                while (true)
+                {
+                    Console.Write("\nNhập mã linh kiện: ");
+                    lk.MSLK = Console.ReadLine().Trim();
+                    if (string.IsNullOrWhiteSpace(lk.MSLK))
+                    {
+                        Console.WriteLine("\nMa linh kien khong duoc de trong! Nhap lai: ");
+                        continue;
+                    }
+                    if (ds.list.ContainsKey(lk.MSLK))
+                    {
+                        Console.WriteLine("\nMa linh kien da ton tai! Nhap lai: ");
+                        continue;
+                    }
+                    break;
+                }
+
+                while (true)
+                {
+                    Console.Write("Nhap ten linh kien: ");
+                    lk.Ten = Console.ReadLine();
+                    if (string.IsNullOrWhiteSpace(lk.Ten))
+                    {
+                        Console.WriteLine("\nTen linh kien khong duoc bo trong! Nhap lai: ");
+                        continue;
+                    }
+                    break;
+                }
+
+                while (true)
+                {
+                    Console.Write("Nhap loai linh kien: ");
+                    lk.LoaiLK = Console.ReadLine();
+                    if (string.IsNullOrWhiteSpace(lk.LoaiLK))
+                    {
+                        Console.WriteLine("\nLoai linh kien khong duoc bo trong! Nhap lai: ");
+                        continue;
+                    }
+                    break;
+                }
+
+                while (true)
+                {
+                    Console.Write("Nhap gia nhap: ");
+                    if (decimal.TryParse(Console.ReadLine(), out lk.GiaNhap) && lk.GiaNhap >= 0)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nGia nhap khong hop le! Nhap lai: ");
+                    }
+                }
+
+                while (true)
+                {
+                    Console.Write("Nhap luong ton kho: ");
+                    if (int.TryParse(Console.ReadLine(), out lk.TonKho) && lk.TonKho >= 0)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nLuong ton kho khong hop le! Nhap lai: ");
+                    }
+                }
+
+                ds.list.Add(lk.MSLK, lk);
+                Console.WriteLine("\nThem linh kien thanh cong!");
+            }
+        }
+    public struct SUA
+{
+    public void CapNhatTen(ref DanhSach ds, string ma)
+    {
+        Console.Clear();
+        if (ds.list.ContainsKey(ma))
+        {
+            LinhKien lk = ds.list[ma];
+            Console.Write($"\nNhap ten moi cho ma {lk.MSLK}: ");
+
+            string tenMoi;
+            while (true)
+            {
+                tenMoi = Console.ReadLine();
+                if (string.IsNullOrWhiteSpace(tenMoi))
+                {
+                    Console.Write("\nKhong duoc bo trong! Nhap lai: ");
+                    continue;
+                }
+                break;
+            }
+
+            lk.Ten = tenMoi;
+            ds.list[ma] = lk;
+            Console.WriteLine("\nCap nhat thanh cong!");
+        }
+        else
+        {
+            Console.WriteLine("\nKhong tim thay linh kien!");
+        }
+    }
+
+    public void CapNhatLoai(ref DanhSach ds, string ma)
+    {
+        if (ds.list.ContainsKey(ma))
+        {
+            LinhKien lk = ds.list[ma];
+            Console.Write($"\nNhap loai linh kien moi cho ma {lk.MSLK}: ");
+
+            string loaiMoi;
+            while (true)
+            {
+                loaiMoi = Console.ReadLine();
+                if (string.IsNullOrWhiteSpace(loaiMoi))
+                {
+                    Console.Write("\nKhong duoc bo trong! Nhap lai: ");
+                    continue;
+                }
+                break;
+            }
+
+            lk.LoaiLK = loaiMoi;
+            ds.list[ma] = lk;
+            Console.WriteLine("\nCap nhat thanh cong!");
+        }
+        else
+        {
+            Console.WriteLine("\nKhong tim thay linh kien!");
+        }
+    }
+
+    public void CapNhatGiaNhap(ref DanhSach ds, string ma)
+    {
+        if (ds.list.ContainsKey(ma))
+        {
+            LinhKien lk = ds.list[ma];
+            Console.Write($"\nNhap gia nhap moi cho ma {lk.MSLK}: ");
+
+            decimal giaMoi;
+            while (true)
+            {
+                string input = Console.ReadLine().Replace(',', '.');
+                if (decimal.TryParse(input, out giaMoi) && giaMoi >= 0)
+                {
+                    break;
+                }
+                else
+                {
+                    Console.Write("\nGia nhap khong hop le! Nhap lai: ");
+                }
+            }
+
+            lk.GiaNhap = giaMoi;
+            ds.list[ma] = lk;
+            Console.WriteLine("\nCap nhat thanh cong!");
+        }
+        else
+        {
+            Console.WriteLine("\nKhong tim thay linh kien!");
+        }
+    }
+
+    public void CapNhatTonKho(ref DanhSach ds, string ma)
+    {
+        if (ds.list.ContainsKey(ma))
+        {
+            LinhKien lk = ds.list[ma];
+            Console.Write($"\nNhap so ton kho moi cho ma {lk.MSLK}: ");
+
+            int tonKhoMoi;
+            while (true)
+            {
+                string input = Console.ReadLine();
+                if (int.TryParse(input, out tonKhoMoi) && tonKhoMoi >= 0)
+                {
+                    break;
+                }
+                else
+                {
+                    Console.Write("\nSo ton kho khong hop le! Nhap lai: ");
+                }
+            }
+
+            lk.TonKho = tonKhoMoi;
+            ds.list[ma] = lk;
+            Console.WriteLine("\nCap nhat thanh cong!");
+        }
+        else
+        {
+            Console.WriteLine("\nKhong tim thay linh kien!");
+        }
+    }
+
+    public void Sua(ref DanhSach ds)
+    {
+        Console.WriteLine("\n=== SỬA LINH KIỆN ===");
+
+        // Nhập mã linh kiện trước
+        Console.Write("Nhap ma linh kien muon sua: ");
+        string ma = Console.ReadLine();
+
+        if (!ds.list.ContainsKey(ma))
+        {
+            Console.WriteLine("\nKhong tim thay linh kien!");
+            return;
+        }
+
+        // Hiển thị thông tin linh kiện hiện tại
+        Console.WriteLine("\nThong tin linh kien hien tai:");
+        ds.list[ma].HienThi();
+
+        // Hiển thị menu sửa
+        bool tiepTuc = true;
+        while (tiepTuc)
+        {
+            Console.WriteLine("\n=== MENU CAP NHAT LINH KIEN ===");
+            Console.WriteLine("1. Cap nhat ten");
+            Console.WriteLine("2. Cap nhat loai");
+            Console.WriteLine("3. Cap nhat gia nhap");
+            Console.WriteLine("4. Cap nhat ton kho");
+            Console.WriteLine("5. Quay ve menu chinh");
+            Console.Write("Chon cach cap nhat (1-5): ");
+            string chon = Console.ReadLine();
+
+            switch (chon)
+            {
+                case "1":
+                    CapNhatTen(ref ds, ma);
+                    break;
+                case "2":
+                    CapNhatLoai(ref ds, ma);
+                    break;
+                case "3":
+                    CapNhatGiaNhap(ref ds, ma);
+                    break;
+                case "4":
+                    CapNhatTonKho(ref ds, ma);
+                    break;
+                case "5":
+                    tiepTuc = false;
+                    break;
+                default:
+                    Console.WriteLine("\nLua chon khong hop le!");
+                    break;
+            }
+            if (tiepTuc)
+            {
+                Console.WriteLine("\nNhan Enter de tiep tuc sua...");
+                Console.ReadLine();
+            }
+        }
+    }
+}
+    public struct XOA
+{
+    public void XoaLinhKien(ref DanhSach ds)
+    {
+        Console.Clear();
+        Console.Write("Nhap ma linh kien muon xoa: ");
+        string ma = Console.ReadLine();
+
+        if (ds.list.Remove(ma))
+        {
+            Console.WriteLine("\nDa xoa linh kien!");
+        }
+        else
+        {
+            Console.WriteLine("Khong tim thay ma linh kien can xoa!");
+        }
+    }
+}
 
     //Phần của Vy
 
@@ -354,7 +635,8 @@ namespace ConsoleApp1
                         }
                     case 2:
                         {
-                            
+                            b.Them(ref a);
+                            a.VeMenu();
                             break;
                         }
                     case 3:
@@ -364,7 +646,8 @@ namespace ConsoleApp1
                         }
                     case 4:
                         {
-                           
+                           d.Sua(ref a);
+                            a.VeMenu();
                             break;
                         }
                     case 5:
@@ -374,7 +657,8 @@ namespace ConsoleApp1
                         }
                     case 6:
                         {
-                            
+                            f.XoaLinhKien(ref a);
+                            a.VeMenu();
                             break;
                         }
                     case 7:
